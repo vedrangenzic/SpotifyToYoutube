@@ -1,0 +1,25 @@
+﻿@model SpotifyToYoutube.Models.PlaylistViewModel
+@{
+    ViewData["Title"] = "SpotiFoosh";
+}
+
+<h1>Spotify Playlists</h1>
+
+<div> 
+    <ul>
+        @foreach (var playlist in Model.Playlists)
+        {
+            <li>
+                <a href="@Url.Action("Index", "Youtube", new { token = Model.Token, id = playlist.Id, playlistName = playlist.Name })" >@playlist.Name</a>
+                <ul>
+                    @foreach (var track in playlist.Tracks)
+                    {
+                        <li>@track.Name</li>
+                    }
+                </ul>
+
+            </li>
+        }
+    </ul>
+</div>
+
