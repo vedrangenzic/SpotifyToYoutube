@@ -5,7 +5,6 @@ using Google.Apis.YouTube.v3;
 using Google.Apis.YouTube.v3.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using SpotifyToYoutube.Models;
 using SpotifyToYoutube.Services;
 using System;
 using System.Collections.Generic;
@@ -53,9 +52,9 @@ namespace SpotifyToYoutube.Controllers
 
             // Add each result to the appropriate list, and then display the lists of
             // matching videos, channels, and playlists.
-                video.Name = String.Format(searchListResponse.Items.First().Snippet.Title);
-                video.Id = String.Format(searchListResponse.Items.First().Id.VideoId);             
-            
+            video.Name = String.Format(searchListResponse.Items.First().Snippet.Title);
+            video.Id = String.Format(searchListResponse.Items.First().Id.VideoId);
+
             return video;
         }
         private async Task<string> CreateYoutubePlaylist(string playlistName, List<Models.Track> tracks)
@@ -100,8 +99,6 @@ namespace SpotifyToYoutube.Controllers
                 newPlaylistItem.Snippet.ResourceId.VideoId = video.Id;
                 newPlaylistItem = await youtubeService.PlaylistItems.Insert(newPlaylistItem, "snippet").ExecuteAsync();
             }
-            // Add a video to the newly created playlist.
-            
 
             return newPlaylist.Id;
         }
